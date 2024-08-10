@@ -1,61 +1,48 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import { redirect } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+const Page = () => {
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  useEffect(() => {
+    if (isWalletConnected) {
+      redirect("/NFTs");
+    }
+  }, [isWalletConnected]);
 
-const NFTMarketplace = () => {
-  const notableCollections = [
-    { title: 'Orbit by Jiannan Huang', img: 'url1' },
-    { title: 'Math Art (1980-1995)', img: 'url2' },
-    { title: 'SERAPH Soul Series', img: 'url3' },
-    { title: 'Construction Token by Artist', img: 'url4' },
-    { title: 'Matr1x 2061', img: 'url5' }
-  ];
-
-  const topCollectorBuys = [
-    { title: 'Collection A', img: 'url6' },
-    { title: 'Collection B', img: 'url7' },
-    { title: 'Collection C', img: 'url8' },
-    { title: 'Collection D', img: 'url9' },
-    { title: 'Collection E', img: 'url10' }
-  ];
-
-  const [selectedSection, setSelectedSection] = useState('Trending');
+  //Add functionality that will run when button is clicked
+  const handleClick = () => {
+    // setIsWalletConnected(true);
+  };
 
   return (
-    <>
-      <div className="flex flex-col items-center bg-black text-white min-h-screen">
-        <h1 className="text-5xl font-bold text-yellow-400 my-8">NFT Marketplace</h1>
-        <div className="w-full max-w-7xl px-4 mb-8">
-          <Link href="/NFT">
-            Go to NFT Page
-          </Link>
-        </div>
-        <div className="w-full max-w-7xl px-4 mb-8">
-          <h2 className="text-3xl font-semibold text-yellow-400 mb-4">Notable Collections</h2>
-          <div className="grid grid-cols-5 gap-4">
-            {notableCollections.map((collection, index) => (
-              <div key={index} className="bg-gray-800 rounded-lg p-4">
-                <img src={collection.img} alt={collection.title} className="w-full h-40 object-cover rounded-lg mb-4" />
-                <h3 className="text-lg font-semibold text-yellow-400">{collection.title}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="w-full max-w-7xl px-4 mb-8">
-          <h2 className="text-3xl font-semibold text-yellow-400 mb-4">Top Collector Buys Today</h2>
-          <div className="grid grid-cols-5 gap-4">
-            {topCollectorBuys.map((buy, index) => (
-              <div key={index} className="bg-gray-800 rounded-lg p-4">
-                <img src={buy.img} alt={buy.title} className="w-full h-40 object-cover rounded-lg mb-4" />
-                <h3 className="text-lg font-semibold text-yellow-400">{buy.title}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className=" items-center text-center mt-10 flex flex-col space-y-10">
+      <div>
+        <h1 className="text-2xl font-semibold ">Welcome to NFT testing page</h1>
       </div>
-    </>
+      <div>
+        <h1 className="">Please connect your wallet here:</h1>
+        <button
+          className="p-4 mt-4 text-sm bg-gray-500 text-white rounded-sm border-2 hover:bg-gray-400"
+          onClick={handleClick}
+        >
+          Connect Wallet
+        </button>
+      </div>
+      <div>
+        <Link href={"/NFTs"}>
+          <button className="p-2 mt-4 text-sm bg-gray-500 text-white rounded-sm border-2 hover:bg-gray-400">
+            Go to Marketplace
+          </button>
+        </Link>
+        <Link href={"/NFT"}>
+          <button className="p-2 mt-4 text-sm bg-gray-500 text-white rounded-sm border-2 hover:bg-gray-400">
+            Go to Single NFT page
+          </button>
+        </Link>
+      </div>
+    </div>
   );
 };
 
-export default NFTMarketplace;
+export default Page;
