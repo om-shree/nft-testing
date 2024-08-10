@@ -43,7 +43,7 @@ const NFTPage = () => {
             <img
               src={nft.image}
               alt={nft.title}
-              style={{ width: "100%", height: "auto", borderRadius: "8px" }}
+              style={{ width: "50%", height: "auto", borderRadius: "8px" }}
             />
           </div>
           <div style={{ width: "100%" }}>
